@@ -1,0 +1,50 @@
+version: "3.8"
+
+services:
+ lb:
+    image: haproxy
+    ports:
+      - "8080:8080"
+    volumes:
+      - /Users/alokiksinghkinra/Documents/GitHub/CPSC559_Proj/proxy/haproxy.cfg:/usr/local/etc/haproxy/haproxy.cfg
+    command: haproxy -f /usr/local/etc/haproxy/haproxy.cfg
+
+ server1:
+    image: nodeapp
+    environment:
+      - APPID=1111
+      - willStart=1
+    ports:
+      - "1111:1111"
+ 
+
+ server2:
+    image: nodeapp
+    environment:
+      - APPID=2222
+      - willStart=0
+    ports:
+      - "2222:2222"
+ 
+
+ server3:
+    image: nodeapp
+    environment:
+      - APPID=3333
+      - willStart=0
+    ports:
+      - "3333:3333"
+   
+ server4:
+    image: nodeapp
+    environment:
+      - APPID=4444
+      - willStart=0
+    ports:
+      - "4444:4444"
+  
+ rds:
+    image: redis:latest
+    # volumes:
+    #   - ./redis:/data
+   
